@@ -31,13 +31,13 @@ For a more detailed technical explanation, please see `report.md`.
 ### 2. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
-cd <your-repo-directory>
+git clone https://github.com/arinbalyan/stealthai-task-Arin.git
+cd https://github.com/arinbalyan/stealthai-task-Arin.git
 ```
 
 ### 3. Install Dependencies
 
-It is recommended to use a virtual environment to avoid conflicts with other projects.
+I recommend using venv to avoid any package issues...
 
 ```bash
 # Create and activate a virtual environment (optional but recommended)
@@ -49,8 +49,6 @@ pip install -r requirements.txt
 ```
 
 ### 4. Project Structure
-
-Make sure your project is organized as follows:
 
 ```
 .
@@ -71,7 +69,7 @@ Make sure your project is organized as follows:
 
 ## How to Run
 
-Execute the `main3.py` script from your terminal. You can specify the paths for the input video, output video, and model, or use the default values.
+Execute the `main3.py` script from your terminal.
 
 ```bash
 python main3.py
@@ -87,7 +85,7 @@ python main3.py
     -   Default: `model-task2/best.pt`
 
 **Example:**
-
+Even if you do not do this I have made the code such that it will already make the required folders
 ```bash
 python main3.py --input my_videos/game1.mp4 --output results/game1_tracked.mp4
 ```
@@ -102,17 +100,7 @@ If the output video isn't playable, try these solutions:
      - MJPG (Motion-JPEG)
      - XVID
      - PIM1 (MPEG-1)
-   - On Windows, install the K-Lite Codec Pack for broader format support
-
-2. **DirectShow Support**:
-```python
-import cv2
-print([x for x in dir(cv2.videoio) if x.startswith('CAP_')])  # Print available backends
-```
 
 3. **Alternative Players**:
    - Try VLC or MPV for better codec support
    - Use FFmpeg to convert if needed:
-```bash
-ffmpeg -i input.mp4 -c:v libx264 output.mp4
-```

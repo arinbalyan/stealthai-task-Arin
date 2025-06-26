@@ -2,9 +2,9 @@
 
 ## 1. Introduction
 
-This report details the methodology and technical approach used to solve the player re-identification (Re-ID) problem in a sports video context. The primary objective was to detect all players on the field, assign a unique and persistent ID to each one, and maintain that ID even if a player is temporarily occluded or leaves the frame.
+The main goal was to detect every player on the field, assign each a unique ID, and ensure that ID remains consistent even when a player is temporarily hidden or leaves the frame.
 
-The final solution uses a combination of state-of-the-art object detection, Kalman filters for motion tracking, and a robust, two-stage matching algorithm that leverages both spatial and appearance-based features for reliable tracking and re-identification.
+To achieve this, I built a system that blends sharp object detection with predictive motion tracking using Kalman filters. The core of the solution, however, is a robust two-stage matching algorithm that considers both a player's location and their appearance, allowing for reliable tracking and re-identification through the fast-paced action of a game.
 
 ## 2. Core Components
 
