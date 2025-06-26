@@ -9,7 +9,7 @@ The final solution uses a combination of state-of-the-art object detection, Kalm
 ## 2. Core Components
 
 The system is built on three foundational pillars:
-1.  **Player Detection:** A YOLOv8 object detection model, fine-tuned on a relevant sports dataset, is used to locate players in each frame of the video.
+1.  **Player Detection:** A YOLO object detection model, already fine tuned model 'best.pt' has been used for this. 
 2.  **Motion Prediction:** A Kalman filter is assigned to each tracked player to predict their position in subsequent frames. This provides an estimate of a player's location even when the detector fails for a moment.
 3.  **Data Association:** The Hungarian algorithm is used to match new detections to existing tracks. The core of this system's accuracy lies in the cost matrix, which is a weighted combination of location and appearance similarity.
 

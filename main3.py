@@ -9,22 +9,14 @@ import time
 import argparse
 from collections import deque
 
-# Check if CUDA is available and set device accordingly
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Using device: {device}")
 
-# Set PyTorch to use GPU if available
-torch.set_grad_enabled(False)  # Disable gradient calculation for inference
+torch.set_grad_enabled(False)
 
 class KalmanBoxTracker(object):
-    """This class represents the internal state of individual tracked objects observed as bbox."""
     count = 0
     def __init__(self, bbox):
-        """
-        Initialize a tracker using initial bounding box
-        bbox format: [x1, y1, x2, y2]
-        """
-        # Define constant velocity model
         self.kf = KalmanFilter(dim_x=7, dim_z=4)
         self.kf.F = np.array([[1, 0, 0, 0, 1, 0, 0], 
                               [0, 1, 0, 0, 0, 1, 0], 
@@ -53,12 +45,9 @@ class KalmanBoxTracker(object):
         self.hit_streak = 0
         self.age = 0
         self.last_bbox = bbox
-        self.features = deque(maxlen=10) # Store up to 10 feature vectors
+        self.features = deque(maxlen=10)
         
     def update(self, bbox, feature=None):
-        """
-        Updates the state vector with observed bbox
-        """
         self.time_since_update = 0
         self.history = []
         self.hits += 1
@@ -70,9 +59,6 @@ class KalmanBoxTracker(object):
             self.features.append(feature)
 
     def predict(self):
-        """
-        Advances the state vector and returns the predicted bounding box estimate
-        """
         if (self.kf.x[6] + self.kf.x[2]) <= 0:
             self.kf.x[6] *= 0.0
         self.kf.predict()
@@ -84,15 +70,9 @@ class KalmanBoxTracker(object):
         return self.history[-1]
 
     def get_state(self):
-        """
-        Returns the current bounding box estimate
-        """
         return self.convert_x_to_bbox(self.kf.x)
     
     def get_features(self):
-        """
-        Returns the average of stored features
-        """
         if not self.features:
             return None
         return np.mean(self.features, axis=0)
